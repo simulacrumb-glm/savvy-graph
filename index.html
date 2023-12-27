@@ -59,9 +59,9 @@
     <div id="myBtnContainer">
       <button class="btn active" onclick="filterData('all')">Show all</button>
       <button class="btn" onclick="filterData('dapp')">Dapps</button>
-      <button class="btn" onclick="filterData('bridge')">Bridges</button>
+      <!-- <button class="btn" onclick="filterData('bridge')">Bridges</button>
       <button class="btn" onclick="filterData('cex')">Centralized Exchanges</button>
-      <button class="btn" onclick="filterData('wallet')">Wallets</button>
+      <button class="btn" onclick="filterData('wallet')">Wallets</button> -->
       <button class="btn" onclick="filterData('coin')">Coins</button>
     </div>
     <div id="cy"></div>
@@ -253,7 +253,7 @@
       if (option === 'coin') {
         //get list of nodes by type
         filterList = nodes.filter(function(e) {
-          return (e.data.type === 'coin' || e.data.type === 'token')
+          return (e.data.type === 'coin' || e.data.type === 'token' || e.data.type === 'pool')
         });
       } else {
         //get list of nodes by type
@@ -367,7 +367,7 @@
         ret = 'orange'
         break;
       case 'pool':
-        ret="grey"
+        ret="violet"
         break;
     }
     return ret
@@ -426,7 +426,7 @@
         'text-opacity': 0
       }),
 
-    elements: filterData('cex'),
+    elements: filterData('all'),
 
 
     ready: function() {
