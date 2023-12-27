@@ -1,0 +1,436 @@
+<html>
+
+  <head>
+    <style>
+      body {
+        font: 14px helvetica neue, helvetica, arial, sans-serif;
+      }
+
+      #header {
+        height: 5%;
+        width: 100%;
+        display: table;
+        text-align: center;
+        background: white;
+      }
+
+      .title {
+        display: table-row;
+      }
+
+      #myBtnContainer {
+        height: 5%;
+        top: 5%;
+        bottom: 10%;
+        text-align: center;
+        vertical-align: bottom;
+      }
+
+      #cy {
+        height: 65%;
+        width: 100%;
+        position: absolute;
+        top: 10%;
+        bottom: 75%;
+        background: #f5f5f5;
+      }
+
+      #list {
+        width: 100%;
+        position: absolute;
+        top: 75%;
+        background: lightgrey;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="header">
+      <div class="title">
+        <p>
+          <b>Conflux Network ("The Tree-Graph")</b>
+        </p>
+      </div>
+      <div class="title">
+        <p>Labeled Property Graph Visualization of Web3 Entities</p>
+      </div>
+    </div>
+    <div id="myBtnContainer">
+      <button class="btn active" onclick="filterData('all')">Show all</button>
+      <button class="btn" onclick="filterData('dapp')">Dapps</button>
+      <button class="btn" onclick="filterData('bridge')">Bridges</button>
+      <button class="btn" onclick="filterData('cex')">Centralized Exchanges</button>
+      <button class="btn" onclick="filterData('wallet')">Wallets</button>
+      <button class="btn" onclick="filterData('coin')">Coins</button>
+    </div>
+    <div id="cy"></div>
+    <table id="list"></table>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.5/cytoscape.js"></script>
+  <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+  <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+  <script src="https://unpkg.com/cytoscape-fcose/cytoscape-fcose.js"></script>
+  <script src="data.js"></script>
+  <script>
+  var fcoseOptions = {
+    name: 'fcose',
+    // 'draft', 'default' or 'proof' 
+    // - "draft" only applies spectral layout 
+    // - "default" improves the quality with incremental layout (fast cooling rate)
+    // - "proof" improves the quality with incremental layout (slow cooling rate) 
+    quality: "default",
+    // Use random node positions at beginning of layout
+    // if this is set to false, then quality option must be "proof"
+    randomize: true,
+    // Whether or not to animate the layout
+    animate: true,
+    // Duration of animation in ms, if enabled
+    animationDuration: 500,
+    // Easing of animation, if enabled
+    animationEasing: undefined,
+    // Fit the viewport to the repositioned nodes
+    fit: true,
+    // Padding around layout
+    padding: 30,
+    // Whether to include labels in node dimensions. Valid in "proof" quality
+    nodeDimensionsIncludeLabels: true,
+    // Whether or not simple nodes (non-compound nodes) are of uniform dimensions
+    uniformNodeDimensions: false,
+    // Whether to pack disconnected components - cytoscape-layout-utilities extension should be registered and initialized
+    packComponents: false,
+    // Layout step - all, transformed, enforced, cose - for debug purpose only
+    step: "all",
+
+    /* spectral layout options */
+
+    // False for random, true for greedy sampling
+    samplingType: true,
+    // Sample size to construct distance matrix
+    sampleSize: 50,
+    // Separation amount between nodes
+    nodeSeparation: 300,
+    // Power iteration tolerance
+    piTol: 1,
+
+    /* incremental layout options */
+
+    // Node repulsion (non overlapping) multiplier
+    //nodeRepulsion: node => 90000000000000,
+    nodeRepulsion: node => 9,
+    // Ideal edge (non nested) length
+    idealEdgeLength: edge => 500,
+    // Divisor to compute edge forces
+    edgeElasticity: edge => 0.45,
+    // Nesting factor (multiplier) to compute ideal edge length for nested edges
+    nestingFactor: 0.1,
+    // Maximum number of iterations to perform - this is a suggested value and might be adjusted by the algorithm as required
+    numIter: 2500,
+    // For enabling tiling
+    tile: true,
+    // Represents the amount of the vertical space to put between the zero degree members during the tiling operation(can also be a function)
+    tilingPaddingVertical: 100,
+    // Represents the amount of the horizontal space to put between the zero degree members during the tiling operation(can also be a function)
+    tilingPaddingHorizontal: 200,
+    // Gravity force (constant)
+    gravity: 0.1,
+    // Gravity range (constant) for compounds
+    gravityRangeCompound: 1.5,
+    // Gravity force (constant) for compounds
+    gravityCompound: 1.0,
+    // Gravity range (constant)
+    gravityRange: 1,
+    // Initial cooling factor for incremental layout  
+    initialEnergyOnIncremental: 0.3,
+
+    /* constraint options */
+
+    // Fix desired nodes to predefined positions
+    // [{nodeId: 'n1', position: {x: 100, y: 200}}, {...}]
+    fixedNodeConstraint: undefined,
+    // Align desired nodes in vertical/horizontal direction
+    // {vertical: [['n1', 'n2'], [...]], horizontal: [['n2', 'n4'], [...]]}
+    alignmentConstraint: undefined,
+    // Place two nodes relatively in vertical/horizontal direction
+    // [{top: 'n1', bottom: 'n2', gap: 100}, {left: 'n3', right: 'n4', gap: 75}, {...}]
+    relativePlacementConstraint: undefined,
+
+    /* layout event callbacks */
+    ready: () => {}, // on layoutready
+    stop: () => {} // on layoutstop
+  };
+
+
+  async function addData() {
+
+    var nodes = await
+    graph.nodes.map(function(e) {
+      e.weight = 2
+      e.faveShape = "octagon"
+      e.faveColor = "#F5A45D"
+      //console.log("added node:" + e.id)
+      return {
+        data: e
+      }
+    })
+
+    //console.log(nodes.length + " at " + new Date().getTime())
+
+    var edges = await
+    graph.links.map(function(e, index) {
+      e.id = index
+      e.target = e.dest
+      e.strength = 2
+      e.faveColor = "#F5A45D"
+      //console.log(e.source)
+      if (
+        graph.nodes.filter(function(d) {
+          return d.id == e.source;
+        }).length > 0 &&
+        graph.nodes.filter(function(d) {
+          return d.id == e.target;
+        }).length > 0
+      ) {
+        //console.log("added link:" + e.source + ":::" + e.target)
+        return {
+          data: e
+        }
+      } else {
+        console.log("Missing node for: " + e.source)
+      }
+    })
+
+    //console.log(edges.length + " at " + new Date().getTime())
+
+    var data = {}
+    data.nodes = nodes
+    data.edges = edges
+
+    return
+  }
+
+  async function filterData(option) {
+    var nodes = await
+    graph.nodes.map(function(e) {
+      e.weight = 2
+      e.faveShape = "octagon"
+      e.faveColor = "#F5A45D"
+      //console.log("added node:" + e.id)
+      return {
+        data: e
+      }
+    })
+
+    //console.log(nodes.length + " at " + new Date().getTime())
+
+    var edges = await
+    graph.links.map(function(e, index) {
+      e.id = index
+      e.target = e.dest
+      e.strength = 2
+      e.faveColor = "#F5A45D"
+
+      if (
+        graph.nodes.filter(function(d) {
+          return d.id == e.source;
+        }).length > 0 &&
+        graph.nodes.filter(function(d) {
+          return d.id == e.target;
+        }).length > 0
+      ) {
+        //console.log("added link:" + e.source + ":::" + e.target)
+        return {
+          data: e
+        }
+      } else {
+        console.log("Missing node for: " + e.source)
+      }
+    })
+
+    //console.log(edges.length + " at " + new Date().getTime())
+
+    if (option !== 'all') {
+      if (option === 'coin') {
+        //get list of nodes by type
+        filterList = nodes.filter(function(e) {
+          return (e.data.type === 'coin' || e.data.type === 'token')
+        });
+      } else {
+        //get list of nodes by type
+        filterList = nodes.filter(function(e) {
+          return e.data.type === option
+        });
+      }
+      //filter edges by list
+      edges = edges.filter(function(e) {
+        let inclusion = filterList.filter(function(f) {
+          return (e.data.source === f.data.id || e.data.target === f.data.id)
+        })
+        return inclusion.length > 0
+      });
+
+      //filter nodes by edgelist
+      nodes = nodes.filter(function(e) {
+        let inclusion = edges.filter(function(f) {
+          return (f.data.source === e.data.id || f.data.target === e.data.id)
+        })
+        return inclusion.length > 0
+      });
+    }
+
+    nodes = nodes.map(function(e) {
+      e.data.weight = edges.filter(function(f) {
+          return (f.data.source === e.data.id || f.data.target === e.data.id)
+        }).length *
+        5 +
+        80
+      e.data.color = mapColor(e.data)
+      //console.log(e)
+      return e
+    });
+    //console.log(nodes)
+    data = {}
+    data.nodes = nodes
+    data.edges = edges
+    cy.json({
+      elements: data
+    });
+    cy.layout(fcoseOptions).run()
+
+
+    var parentNode = document.getElementById('list')
+    removeAllChildNodes(parentNode)
+
+    for (x = 0; x < nodes.length; x++) {
+      var listItem = nodes[x];
+
+      addChildListRow(parentNode, listItem);
+    }
+
+    return data
+  }
+
+
+  function addChildListRow(parentNode, listItem) {
+    var row = document.createElement("tr");
+
+    var col1 = document.createElement("td");
+    col1.textContent = listItem.data.name;
+
+    var col2 = document.createElement("td");
+    col2.textContent = listItem.data.type;
+
+    var col3 = document.createElement("td");
+
+    var a = document.createElement("a");
+    a.setAttribute("href", listItem.data.url)
+    a.textContent = listItem.data.url;
+    col3.appendChild(a)
+
+    row.appendChild(col1);
+    row.appendChild(col2);
+    row.appendChild(col3);
+    parentNode.appendChild(row);
+  }
+
+  function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
+
+  function mapColor(e) {
+    var ret = ""
+    switch (e.type) {
+      case 'network':
+        ret = 'lightcoral'
+        break;
+      case 'coin':
+        ret = 'gold'
+        break;
+      case 'token':
+        ret = 'goldenrod'
+        break;
+      case 'token_group':
+        ret = 'Moccasin'
+        break;
+      case 'wallet':
+        ret = 'DarkSeaGreen'
+        break;
+      case 'dapp':
+        ret = 'lightblue'
+        break;
+      case 'bridge':
+        ret = 'violet'
+        break;
+      case 'cex':
+        ret = 'orange'
+        break;
+    }
+    return ret
+  }
+
+  //force
+
+  var cy = cytoscape({
+    container: document.getElementById('cy'),
+
+    layout: fcoseOptions,
+
+    style: cytoscape.stylesheet()
+      .selector('node')
+      .css({
+        //'shape': 'data(faveShape)',
+        'width': 'data(weight)',
+        'height': 'data(weight)',
+        'content': 'data(name)',
+        'text-valign': 'center',
+        'font-size': "24px",
+        'text-outline-width': 1,
+        'text-outline-color': 'grey',
+        'background-color': 'data(color)'
+      })
+      .selector(':selected')
+      .css({
+        'border-width': 3,
+        'border-color': '#333',
+        'background-color': 'red',
+        'line-color': 'black',
+        'target-arrow-color': 'black',
+        'source-arrow-color': 'black'
+      })
+
+      .selector('edge')
+      .css({
+        //'curve-style': 'bezier',
+        'opacity': 0.666,
+        //'width': 'mapData(strength, 70, 100, 2, 6)',
+        'target-arrow-shape': 'triangle',
+        'source-arrow-shape': 'circle',
+        'line-color': 'lightseagreen',
+        'source-arrow-color': 'data(faveColor)',
+        'target-arrow-color': 'data(faveColor)',
+        'opacity': 0.75
+      })
+      .selector('edge.questionable')
+      .css({
+        'line-style': 'dotted',
+        'target-arrow-shape': 'diamond'
+      })
+      .selector('.faded')
+      .css({
+        'opacity': 0.25,
+        'text-opacity': 0
+      }),
+
+    elements: filterData('cex'),
+
+
+    ready: function() {
+      window.cy = this
+    }
+  });
+
+  </script>
+
+</html>
