@@ -50,6 +50,13 @@
       "address": null
     },
     {
+      "id": "42f6836a-ca19-4b25-8786-9781cd34ca68",
+      "type": "dapp",
+      "name": "Balancer",
+      "url": "https://app.balancer.fi/",
+      "address": null
+    },
+    {
       "id": "f5351232-f423-4ae3-bd6c-4fd5c00f1b2f",
       "type": "token",
       "name": "Savvy",
@@ -243,6 +250,16 @@
       "predicate": "transacts_on"
     },
     {
+      "source": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "dest": "d1ca7197-dc59-4dd3-b50b-dbdf2332875f",
+      "predicate": "transacts_on"
+    },
+    {
+      "source": "42f6836a-ca19-4b25-8786-9781cd34ca68",
+      "dest": "d1ca7197-dc59-4dd3-b50b-dbdf2332875f",
+      "predicate": "transacts_on"
+    },
+    {
       "source": "d1ca7197-dc59-4dd3-b50b-dbdf2332875f",
       "dest": "209aa7c5-e168-44b2-b81d-b2496500f612",
       "predicate": "has_transactor"
@@ -270,6 +287,16 @@
     {
       "source": "d1ca7197-dc59-4dd3-b50b-dbdf2332875f",
       "dest": "369ce7b0-ec7b-4974-b291-b9755fddd2b8",
+      "predicate": "has_transactor"
+    },
+    {
+      "source": "d1ca7197-dc59-4dd3-b50b-dbdf2332875f",
+      "dest": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "predicate": "has_transactor"
+    },
+    {
+      "source": "d1ca7197-dc59-4dd3-b50b-dbdf2332875f",
+      "dest": "42f6836a-ca19-4b25-8786-9781cd34ca68",
       "predicate": "has_transactor"
     },
     {
@@ -691,6 +718,96 @@
       "source": "90b467f6-7886-43c2-87d6-3ef843197aa5",
       "dest": "9168b52d-159c-4556-90ec-d6bd50385269",
       "predicate": "is_aggregated_by"
+    },
+    {
+      "source": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "dest": "d28e3373-7383-4dc5-a001-f03edfd8523a",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "dest": "5a19078b-fd3d-4324-93bc-5a4b5acb9503",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "dest": "a870f966-2f93-4ef4-b0e6-bc6d9f592adb",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "dest": "1c2d9974-f41d-4ff4-8c30-e9474b47fba7",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "dest": "ccc77b03-2efa-4ae8-a668-7913ddb98026",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "d28e3373-7383-4dc5-a001-f03edfd8523a",
+      "dest": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "5a19078b-fd3d-4324-93bc-5a4b5acb9503",
+      "dest": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "a870f966-2f93-4ef4-b0e6-bc6d9f592adb",
+      "dest": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "1c2d9974-f41d-4ff4-8c30-e9474b47fba7",
+      "dest": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "ccc77b03-2efa-4ae8-a668-7913ddb98026",
+      "dest": "7455c826-c969-4371-a55e-ee205f656ea7",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "dest": "90b467f6-7886-43c2-87d6-3ef843197aa5",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "dest": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "dest": "9efbad1c-97dc-4352-b83c-ae312766576b",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "90b467f6-7886-43c2-87d6-3ef843197aa5",
+      "dest": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
+      "dest": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "9efbad1c-97dc-4352-b83c-ae312766576b",
+      "dest": "d3afa8d9-d8a6-4a19-9485-25ac27876f07",
+      "predicate": "deployed_by"
+    },
+    {
+      "source": "42f6836a-ca19-4b25-8786-9781cd34ca68",
+      "dest": "8d119fbb-33f6-474d-b0df-f83451a5a03a",
+      "predicate": "is_deployer_of"
+    },
+    {
+      "source": "8d119fbb-33f6-474d-b0df-f83451a5a03a",
+      "dest": "42f6836a-ca19-4b25-8786-9781cd34ca68",
+      "predicate": "deployed_by"
     }
   ]
 }

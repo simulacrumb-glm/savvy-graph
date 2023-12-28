@@ -262,12 +262,32 @@
         });
       }
       //filter edges by list
-      edges = edges.filter(function(e) {
-        let inclusion = filterList.filter(function(f) {
-          return (e.data.source === f.data.id || e.data.target === f.data.id)
-        })
-        return inclusion.length > 0
-      });
+      if (option == 'dapp') {
+        edges = edges.filter(function(e) {
+          let inclusion = filterList.filter(function(f) {
+            return (e.data.predicate === "transacts_on")
+          })
+          return inclusion.length > 0
+        });
+      }else if (option == 'coin'){
+        edges = edges.filter(function(e) {
+          let inclusion = filterList.filter(function(f) {
+            return (
+              (e.data.source === f.data.id || e.data.target === f.data.id)
+              && !(e.data.predicate == "deployed_by" || e.data.predicate == "is_deployer_of")
+              )
+          })
+          return inclusion.length > 0
+        });
+      }else{
+        edges = edges.filter(function(e) {
+          let inclusion = filterList.filter(function(f) {
+            return (e.data.source === f.data.id || e.data.target === f.data.id)
+          })
+          return inclusion.length > 0
+        });
+      }
+      
 
       //filter nodes by edgelist
       nodes = nodes.filter(function(e) {

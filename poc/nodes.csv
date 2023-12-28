@@ -6,6 +6,7 @@ b8f85fd7-8481-425d-8c6e-dea6481efc62|dapp|{"name":"Bunni","url":"https://bunni.p
 9168b52d-159c-4556-90ec-d6bd50385269|dapp|{"name":"Merkl","url":"https://merkl.angle.money/","features":[],"icon":""}
 369ce7b0-ec7b-4974-b291-b9755fddd2b8|dapp|{"name":"Frax Finance","url":"https://frax.finance/","features":[],"icon":""}
 d3afa8d9-d8a6-4a19-9485-25ac27876f07|dapp|{"name":"Uniswap","url":"https://app.uniswap.org/","features":[],"icon":""}
+42f6836a-ca19-4b25-8786-9781cd34ca68|dapp|{"name":"Balancer","url":"https://app.balancer.fi/","features":[],"icon":""}
 f5351232-f423-4ae3-bd6c-4fd5c00f1b2f|token|{"name":"Savvy","symbol":"SVY","address":"0x43ab8f7d2a8dd4102ccea6b438f6d747b1b9f034","url":"https://arbiscan.io/address/0x43ab8f7d2a8dd4102ccea6b438f6d747b1b9f034","features":[],"icon":""}
 28d708f7-8e14-40d5-a233-01f896fa21b2|token|{"name":"Savvy Vote Escrow","symbol":"veSVY","address":"0x9aeee4656f67034b06d99294062feba1015430ad","url":"https://arbiscan.io/address/0x9aeee4656f67034b06d99294062feba1015430ad","features":[],"icon":""}
 ef27e38b-babc-4ba1-856f-3aebf358bb7c|token|{"name":"Savvy BTC","symbol":"svBTC","address":"0xeee18334c414a47fb886a7317e1885b2bfb8c2a6","url":"https://arbiscan.io/address/0xeee18334c414a47fb886a7317e1885b2bfb8c2a6","features":[],"icon":""}
