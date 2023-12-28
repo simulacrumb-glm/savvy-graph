@@ -129,63 +129,63 @@
     {
       "id": "d28e3373-7383-4dc5-a001-f03edfd8523a",
       "type": "pool",
-      "name": "SVY-ETH LB V1",
+      "name": "SVY-ETH TJ V1",
       "url": "https://traderjoexyz.com/arbitrum/pool/v1/0x43ab8f7d2a8dd4102ccea6b438f6d747b1b9f034/ETH",
       "address": "0x11342253ae68862e13ca7af9dfc2b67154bc41b1"
     },
     {
       "id": "5a19078b-fd3d-4324-93bc-5a4b5acb9503",
       "type": "pool",
-      "name": "SVY-ETH LB V2",
+      "name": "SVY-ETH TJ V2",
       "url": "https://traderjoexyz.com/arbitrum/pool/v21/0x43ab8f7d2a8dd4102ccea6b438f6d747b1b9f034/ETH/100",
       "address": "0x9f28B1eACf17F64cD952DeAA14f0487b9F74bbb6"
     },
     {
       "id": "a870f966-2f93-4ef4-b0e6-bc6d9f592adb",
       "type": "pool",
-      "name": "svBTC-WTBC",
+      "name": "svBTC-WTBC TJ",
       "url": "https://traderjoexyz.com/arbitrum/pool/v21/0xeEE18334c414A47FB886a7317E1885b2Bfb8c2A6/0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f/5",
       "address": "0x830203B9a16920Feb55D58d964Ce83E1BA000269"
     },
     {
       "id": "1c2d9974-f41d-4ff4-8c30-e9474b47fba7",
       "type": "pool",
-      "name": "svETH-ETH",
+      "name": "svETH-ETH TJ",
       "url": "https://traderjoexyz.com/arbitrum/pool/v21/0xf7728582002ef82908c8242CF552E969BA863Ffa/0x82aF49447D8a07e3bd95BD0d56f35241523fBab1/5",
       "address": "0x2E14E24Ec3efBD3b8c8976405351f8233d59650e"
     },
     {
       "id": "ccc77b03-2efa-4ae8-a668-7913ddb98026",
       "type": "pool",
-      "name": "svUSD-USDC",
+      "name": "svUSD-USDC TJ",
       "url": "https://traderjoexyz.com/arbitrum/pool/v21/0xF202Ab403Cd7E90197ec0f010ee897E283037706/0xaf88d065e77c8cC2239327C5EDb3A432268e5831/5",
       "address": "0x3BE852FF9F142783c71435524D63E2196E5f305A"
     },
     {
       "id": "90b467f6-7886-43c2-87d6-3ef843197aa5",
       "type": "pool",
-      "name": "svETH-frxETH",
+      "name": "svETH-frxETH UNI",
       "url": "https://bunni.pro/pools/arbitrum/0x6a28350341a27e98170b6e8274bf2382b4dae6ac",
       "address": "0x6a28350341a27e98170b6e8274bf2382b4dae6ac"
     },
     {
       "id": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
       "type": "pool",
-      "name": "svUSD-FRAX",
+      "name": "svUSD-FRAX UNI",
       "url": "https://bunni.pro/pools/arbitrum/0x28082db75615849d12f37627e614b479749c7903",
       "address": "0x28082db75615849d12f37627e614b479749c7903"
     },
     {
       "id": "9efbad1c-97dc-4352-b83c-ae312766576b",
       "type": "pool",
-      "name": "SVY-WETH",
+      "name": "SVY-WETH UNI",
       "url": "https://bunni.pro/pools/arbitrum/0xc3fcf0ef6635f0157f567f92050a23d407976daa",
       "address": "0xc3fcf0ef6635f0157f567f92050a23d407976daa"
     },
     {
       "id": "8d119fbb-33f6-474d-b0df-f83451a5a03a",
       "type": "pool",
-      "name": "svUSD-svBTC-svETH",
+      "name": "svUSD-svBTC-svETH BAL",
       "url": "https://app.balancer.fi/#/arbitrum/pool/0xd1882ca6a22f3df54cd675b300b815864de67b200001000000000000000004c9",
       "address": "0xd1882ca6a22f3df54cd675b300b815864de67b20"
     },
@@ -641,6 +641,56 @@
       "source": "369ce7b0-ec7b-4974-b291-b9755fddd2b8",
       "dest": "50cffbbc-8de1-43a1-81fe-ce1bf212d329",
       "predicate": "is_deployer_of"
+    },
+    {
+      "source": "b8f85fd7-8481-425d-8c6e-dea6481efc62",
+      "dest": "90b467f6-7886-43c2-87d6-3ef843197aa5",
+      "predicate": "aggregates_over"
+    },
+    {
+      "source": "b8f85fd7-8481-425d-8c6e-dea6481efc62",
+      "dest": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
+      "predicate": "aggregates_over"
+    },
+    {
+      "source": "b8f85fd7-8481-425d-8c6e-dea6481efc62",
+      "dest": "9efbad1c-97dc-4352-b83c-ae312766576b",
+      "predicate": "aggregates_over"
+    },
+    {
+      "source": "90b467f6-7886-43c2-87d6-3ef843197aa5",
+      "dest": "b8f85fd7-8481-425d-8c6e-dea6481efc62",
+      "predicate": "is_aggregated_by"
+    },
+    {
+      "source": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
+      "dest": "b8f85fd7-8481-425d-8c6e-dea6481efc62",
+      "predicate": "is_aggregated_by"
+    },
+    {
+      "source": "9efbad1c-97dc-4352-b83c-ae312766576b",
+      "dest": "b8f85fd7-8481-425d-8c6e-dea6481efc62",
+      "predicate": "is_aggregated_by"
+    },
+    {
+      "source": "9168b52d-159c-4556-90ec-d6bd50385269",
+      "dest": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
+      "predicate": "aggregates_over"
+    },
+    {
+      "source": "9168b52d-159c-4556-90ec-d6bd50385269",
+      "dest": "90b467f6-7886-43c2-87d6-3ef843197aa5",
+      "predicate": "aggregates_over"
+    },
+    {
+      "source": "ef507c4b-7d2e-4eb5-87fc-25e9159ed130",
+      "dest": "9168b52d-159c-4556-90ec-d6bd50385269",
+      "predicate": "is_aggregated_by"
+    },
+    {
+      "source": "90b467f6-7886-43c2-87d6-3ef843197aa5",
+      "dest": "9168b52d-159c-4556-90ec-d6bd50385269",
+      "predicate": "is_aggregated_by"
     }
   ]
 }
